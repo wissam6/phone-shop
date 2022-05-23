@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <title>
+
+        </title>
+        <link rel="stylesheet" href="login_style.css">
+    </head>
+    <body>
+        <%- include('header.ejs') %>
+        <div class="login-page">
+            <div class="form">
+        <!--register form-->
+        <h3 style="margin-bottom: 2em;">Sign Up</h3>
+        <form class="register-form" method="post" action="/signup" style="display: block;">
+            <input type="text" placeholder="name" name="name" required/>
+            <input type="password" placeholder="password" name="password" required/>
+            <input type="email" placeholder="email address" name="email" required/>
+            <input type="text" placeholder="username" name="username" required/>
+            <button>create</button>
+            <p class="message">Already registered? <a href="/login">Sign In</a></p>
+          </form>
+        </div>
+    </div>
+    </body>
+    <%- include('footer') %>
+</html>

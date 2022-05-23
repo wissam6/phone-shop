@@ -16,10 +16,10 @@ app.use((req, res, next) => {
     next();
   });
 
+//connect to db
+client.connect().then(() => app.listen(3000)).catch((err) => console.log(err));
 
-  client.connect().then(() => app.listen(3000)).catch((err) => console.log(err));
-
-
+//index page
 app.get('/', (req,res) => {
   MongoClient.connect(dbURI, (err,db) => {
     var dbo = db.db('phone-shop');
@@ -27,10 +27,9 @@ app.get('/', (req,res) => {
       res.render('index', {data: result} ); 
       });
   });
- 
-  
 });
 
+//sell phone || insert phone to db
 app.post("/addPhone", (req,res) => {
   MongoClient.connect(dbURI,(err,db) => {
     let brand = req.body.brand;
@@ -48,30 +47,77 @@ app.post("/addPhone", (req,res) => {
   })
 });
 
+
+//login page
 app.get('/login', (req,res) => {
   res.render('login');
 });
 
-//create collection
-/*MongoClient.connect(dbURI, function(err, db) {
-    if (err) throw err;
-    var dbo = db.db("phone-shop");
-    dbo.createCollection("phones", function(err, res) {
-      if (err) throw err;
-      console.log("Collection created!");
-      //db.close();
+//login handling
+app.post('/login', (req,res) => {
+  MongoClient.connect(dbURI, (err,db) => {
+    let username = req.body.username;
+    let password = req.body.password;
+    let user = {
+      username: username,
+      password: password
+    }
+    var dbo = db.db('phone-shop'); 
+    dbo.collection('users').find({username: username, password: password}).toArray((err,result)=> {
+      if(result.length>0) res.redirect('/');
+      else res.redirect('/login');
     });
-  });*/
+  });
+});
 
-  //insert
-  /*MongoClient.connect(dbURI,(err,db) => {
+//sign up page
+app.get('/signup', (req,res) => {
+  res.render('signup');
+});
+
+//signup handling
+app.post('/signup', (req,res)=>{
+  MongoClient.connect(dbURI, (err,db) => {
     var dbo = db.db('phone-shop');
-    var phone = {
-      brand: 'Samsung',
-      price: 1000,
-      used: true,
-      model: "A53"
+    let user = {
+      name : req.body.name,
+      password : req.body.password,
+      email : req.body.email,
+      username: req.body.username
+    }
+    let email = req.body.email;
+    let username = req.body.username;
 
-    };
-    dbo.collection('phones').insertOne(phone, () => console.log('inserted'));
-  })*/
+    //check if email exists
+    
+
+    dbo.collection('users').find({email: email}).toArray((err,result)=> {
+      if(result.length>0) {
+        console.log('email has been taken');
+        var emailExists = 'yes';
+      }
+      else {
+        var emailExists = 'no';
+      }
+
+    });
+    console.log(emailExists);
+
+    /*dbo.collection('users').find({username: username}).toArray((err,result)=> {
+      if(result.length>0) {
+        console.log('username has been taken');
+      }
+      else {
+        dbo.collection('users').insertOne(user, (err,res) => {
+          console.log(res);
+        })
+      }
+    });*/
+
+     /*dbo.collection('users').insertOne(user, (err,res) => {
+        console.log(res);
+      })*/
+
+ 
+  })
+});

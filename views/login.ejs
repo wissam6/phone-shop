@@ -8,6 +8,9 @@
 
         <div class="login-page">
             <div class="form">
+            <h3 class="form-title">Welcome Back</h3>
+
+            <!--register form-->
               <form class="register-form">
                 <input type="text" placeholder="name"/>
                 <input type="password" placeholder="password"/>
@@ -15,15 +18,18 @@
                 <button>create</button>
                 <p class="message">Already registered? <a href="#">Sign In</a></p>
               </form>
-              <form class="login-form">
-                <input type="text" placeholder="username"/>
-                <input type="password" placeholder="password"/>
+
+              <!--login form-->
+              <form class="login-form" action="/login" method="post">
+                <input type="text" placeholder="username" name="username" required/>
+                <input type="password" placeholder="password" name="password" required/>
                 <button>login</button>
-                <p class="message">Not registered? <a href="#">Create an account</a></p>
+                <p class="message">Not registered? <a href="/signup">Create an account</a></p>
               </form>
             </div>
           </div>
-        
+
+          <%- include('footer') %>
         
     </body>
 </html>

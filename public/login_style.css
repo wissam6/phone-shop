@@ -14,6 +14,7 @@
   padding: 45px;
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  margin-bottom: 12.4em;
 }
 .form input {
   font-family: "Roboto", sans-serif;
@@ -49,7 +50,7 @@
   font-size: 12px;
 }
 .form .message a {
-  color: #4CAF50;
+  color: #e27d60;
   text-decoration: none;
 }
 .form .register-form {
@@ -87,6 +88,9 @@
 }
 .container .info span .fa {
   color: #EF3B3A;
+}
+.form-title {
+    margin-bottom: 20px;
 }
 body {
   
