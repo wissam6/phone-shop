@@ -1,0 +1,112 @@
+body {
+    background-color: #85dcb8;
+}
+
+.dropdown {
+    position: relative;
+    margin-left: 40%;
+    margin-top: 5em;
+}
+.phones-title {
+    position: relative;
+    font-family: 'Roboto', sans-serif;
+    font-size: 30px;
+    color: white;
+    margin-bottom: 1em;
+}
+#sort {
+    position: relative;
+    font-size: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    font-family: 'Roboto', sans-serif;
+    margin-left: 13px;
+    color: #c38d9e;
+}
+.insert {
+    position: relative;
+    margin-left: 40%;
+    margin-top: -7em;
+    margin-right: 40%;
+    border:1px solid black;
+    border-radius: 3px;
+    display: none;
+    background-color: #41b3a3;
+}
+#add-phone {
+    position: absolute;
+    padding: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    background-color: white;
+    color: #c38d9e;
+    border-style: solid 1px;
+    border-color: #41b3a3;
+    top: 12.4em;
+    left: 51%;    
+}
+.addPhone {
+    position: relative;
+}
+#insertPhone-label {
+    font-family: 'Roboto', sans-serif;
+    margin-right: 10px;
+    color: white;
+    margin-left: 3em;
+    
+}
+#insertPhone-input {
+    position: absolute;
+    font-family: 'Roboto', sans-serif;
+    left: 9em;
+    padding: 4px;
+    border-radius: 3px;
+}
+.insert-title {
+    position: relative;
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    font-size: 26px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+#button2 {
+    font-family: 'Roboto', sans-serif;
+    padding: 7px;
+    color: #41b3a3;
+    font-size: 18px;
+    background-color: white;
+    border-radius: 5px;
+    border-color: #41b3a3;
+    margin-left: 80px;
+}
+.list {
+    position: relative;
+    margin-left: 41%;
+    margin-top: 4em;
+}
+.listed-phone {
+    position: relative;
+    margin-bottom: 3em;
+    background-color: aliceblue;
+    margin-right: 80%;
+    padding: 20px;
+    border-radius: 5px;
+}
+#list-label {
+    font-family: 'Roboto', sans-serif;
+    color: #c38d9e;
+}
+#list-data {
+    font-family: 'Roboto', sans-serif;
+    color: #41b3a3;
+}
+#order-button {
+    margin-top: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    background-color: #e8a87c;
+    color: white;
+    padding: 5px;
+    border-radius: 3px;
+}

@@ -1,0 +1,74 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="index-styles.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        
+        <%- include('header'); %>
+
+    
+        <div class="dropdown">
+            <h3 class="phones-title">Listed Phones</h3>
+            <select name="Sort By" id="sort">
+                <optgroup label = "Choose One">
+                <option selected disabled>Sort By</option>
+                <option value="">price ascending</option>
+                <option value="">price descending</option>
+                </optgroup>
+            </select>
+            
+        </div>
+
+        <div class="insert" id="showForm">
+
+            <div class="addPhone" >
+            <h3 class="insert-title">Sell Phone</h3>
+            <form action="/addPhone" method="post" >
+                <label for="brand" id="insertPhone-label">Brand:</label>
+                <input type="text" name="brand" id="insertPhone-input"> <br><br>
+                <label for="model" id="insertPhone-label">Model:</label>
+                <input type="text" name="model" id="insertPhone-input"><br><br>
+                <label for="price" id="insertPhone-label">Price:</label>
+                <input type="text" name="price" id="insertPhone-input"><br><br>
+                <label for="used" id="insertPhone-label">Used:</label>
+                <select name="used" id="insertPhone-input">
+                    <option value="true">True</option>
+                    <option value="false">False</option>
+                </select> <br><br><br>
+                <input type="submit" value="Submit" id="button2">
+                <input type="button" value="Exit" id="button2" onclick="exitInsert()">
+            </form>
+            </div>
+            
+            
+            
+        </div>
+        <input onclick="addPhoneButton()" type="button" value="Sell My Phone" id="add-phone">
+        <script>
+            function addPhoneButton() {
+                document.getElementById("showForm").style.display = 'block';
+                document.getElementById("add-phone").style.display = 'none';
+            }
+            function exitInsert() {
+                document.getElementById("showForm").style.display = 'none';
+                document.getElementById("add-phone").style.display = 'block';
+            }
+        </script>
+
+        <div class="list">
+            <% for (i in data) { %>
+                <div class="listed-phone"><span id="list-label">Brand: </span><span id="list-data"><%= data[i].brand %></span> <br>
+                    <span id="list-label">Model: </span><span id="list-data"><%= data[i].model %></span> <br>
+                    <span id="list-label">Price: </span><span id="list-data"><%= data[i].price %></span> <br>
+                    <span id="list-label">Used: </span><span id="list-data"><%= data[i].used %></span> <br> <button id="order-button">Purchase</button> </div>
+            <% } %>
+        </div>
+
+        <div class="footer">
+            <%- include('footer.ejs') %>
+        </div>
+    </body>
+</html>
