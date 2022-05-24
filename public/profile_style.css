@@ -1,0 +1,50 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+body {
+    background-color: #85dcb8;
+}
+.info {
+    position: relative;
+    height: 20em;
+    width: 30%;
+    margin-left: 35%;
+    margin-top: 8%;
+    margin-bottom: 8%;
+    background-color: white;
+    box-shadow: 5px 4px 8px 10px #888888;
+    border-radius: 3px;
+}
+.forms{
+    margin-left: 30%;
+    padding-top: 3em;
+}
+.infoTitle{
+    padding-top: 20px;
+    margin-left: 38%;
+    font-family: Roboto;
+    font-size: 25px;
+}
+#labelstyle {
+    font-family: Roboto;
+    font-size: 20px;
+    color: #c38d9e;
+    font-weight: bold;
+}
+#datastyle {
+    font-family: Roboto;
+    font-weight: bold;
+    margin-top: 5px;
+}
+#inputstyle {
+    padding: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-family: Roboto;
+    width: 70%;
+}
+#submitstyle {
+    padding: 5px;
+    font-family: Roboto;
+    background-color: #41b3a3;
+    color: white;
+}

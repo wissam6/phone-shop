@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="profile_style.css">
+        
+        <title>
+
+        </title>
+    </head>
+    <body>
+        <%- include('header'); %>
+        <div class="info">
+            <h3 class="infoTitle">Your Info</h3>
+            <div class="forms">
+            <!--email-->
+            <div class="email">
+            <label for="" id="labelstyle">Email</label>
+            <p id="datastyle"><%=data[0].email%></p>
+            <form action="/newemail" method="post">
+            <input type="text" name="email" id="inputstyle" placeholder="new email">
+            <input type="submit" name="" id="submitstyle">
+            </form>
+            </div>
+            <!--password-->
+            <div class="password">
+            <label for="" id="labelstyle">Password</label>
+            <p id="datastyle"><%=data[0].password%></p>
+            <form action="/newpassword" method="post">
+            <input type="text" name="password" id="inputstyle" placeholder="new password">
+            <input type="submit" name="" id="submitstyle">
+            </form>
+            </div>
+            </div>
+        </div>
+        <%- include('footer'); %>
+    </body>
+</html>

@@ -1,11 +1,20 @@
 const express = require('express');
 const app = express();
 const { MongoClient } = require('mongodb');
-
+const session = require('express-session');
 
 //db connection
 const dbURI = "mongodb+srv://wissam_6:@phone-shop.oo0ji.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 const client = new MongoClient(dbURI);
+
+//session
+app.set('trust proxy', 1) // trust first proxy
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true }
+}))
 
 //defaults
 app.set('view engine', 'ejs');
@@ -68,6 +77,11 @@ app.post('/login', (req,res) => {
       else res.redirect('/login');
     });
   });
+
+  sessionData = req.session;
+  sessionData.user = {};
+  sessionData.user.username = req.body.username;
+
 });
 
 //sign up page
@@ -88,36 +102,68 @@ app.post('/signup', (req,res)=>{
     let email = req.body.email;
     let username = req.body.username;
 
-    //check if email exists
+    //check if email or username exist
+    function Exists(result) {
+      if(result.length>0) return true;
+      else return false;
+    }  
+  
+    dbo.collection('users').find({email: email}, {username: username}).toArray((err,result)=> {
+      let isDuplicate = Exists(result);
+      if(isDuplicate){
+        console.log('email or username exist');
+        res.redirect('/signup');
+      }
+      else{
+        insertUser(user);
+        res.redirect('/login');
+      } 
+    });
     
 
-    dbo.collection('users').find({email: email}).toArray((err,result)=> {
-      if(result.length>0) {
-        console.log('email has been taken');
-        var emailExists = 'yes';
-      }
-      else {
-        var emailExists = 'no';
-      }
-
-    });
-    console.log(emailExists);
-
-    /*dbo.collection('users').find({username: username}).toArray((err,result)=> {
-      if(result.length>0) {
-        console.log('username has been taken');
-      }
-      else {
-        dbo.collection('users').insertOne(user, (err,res) => {
-          console.log(res);
-        })
-      }
-    });*/
-
-     /*dbo.collection('users').insertOne(user, (err,res) => {
+    function insertUser(user) {
+      dbo.collection('users').insertOne(user, (err,res) => {
         console.log(res);
-      })*/
-
+      })
+    }
  
   })
 });
+
+//profile page
+app.get('/profile', (req,res)=> {
+  let username1 = sessionData.user.username;
+  MongoClient.connect(dbURI, (err,db)=>{
+    var dbo = db.db('phone-shop');  //change
+    dbo.collection('users').find({username: username1}).toArray((err,result)=> {
+       const userInfo = result;
+       res.render('profile', {data: userInfo});
+    });
+  })
+});
+
+//update email
+app.post('/newemail', (req,res)=> {
+  let email = req.body.email;
+  let username = sessionData.user.username;
+  MongoClient.connect(dbURI, (err,db)=>{
+    var dbo = db.db('phone-shop');
+    dbo.collection('users').updateOne({username: username}, {$set: {email: email}}, (err,result)=> {
+      console.log(result);
+      res.redirect('/profile');
+    })
+  });
+})
+
+//update password
+app.post('/newpassword', (req,res)=> {
+  let password = req.body.password;
+  let username = sessionData.user.username;
+  MongoClient.connect(dbURI, (err,db)=>{
+    var dbo = db.db('phone-shop');
+    dbo.collection('users').updateOne({username: username}, {$set: {password: password}}, (err,result)=> {
+      console.log(result);
+      res.redirect('/profile');
+    })
+  });
+})
